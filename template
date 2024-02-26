@@ -1,0 +1,150 @@
+<?php
+require 'config.php';
+if(!empty($_SESSION["id"])){
+    $id = $_SESSION["id"];
+    $result = mysqli_query($conn,"SELECT * FROM tb_user WHERE id = $id");
+    $row = mysqli_fetch_assoc($result);
+}
+elseif ($row["uloga"] != 2) {
+	header("Location: index.php");
+}
+else{
+    header("Location: login.php");
+} ?>
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>NadjiPoso</title>
+	<link rel="stylesheet" href="css/style.css" type="text/css">
+	<script type="text/javascript">
+// Validacija forme za unos
+function validacija_submit() {
+naslov = document.getElementById("naslov").value;
+lokacija = document.getElementById("lokacija").value;
+sprema = document.getElementById("sprema").value;
+opis = document.getElementById("opis").value;
+rok = document.getElementById("rok").value;
+
+forma = document.getElementById("forma");
+if (naslov=="" || lokacija=="" || sprema==""|| opis=="" || rok =="") {
+alert("Nije uneto zahtevano polje!");
+return false;
+}
+
+// manuelni submit forme
+forma.submit();
+}
+</script>
+</head>
+<body>
+<div id="header">
+			<div class="logo">
+				<a href="index.html"><img src="" alt="LOGO" height="52" width="362"></a>
+			</div>
+			<?php if($row["uloga"] == "1") : ?>
+				<ul class="navigation">
+				<li class="active">
+					<a href="index.php">Pocetna</a>
+				</li>
+				<li>
+					<a href="poslovi.php">Oglasi</a>
+				</li>
+				<li>
+					<a href="profil.php">Moj Profil</a>
+				</li>
+				<li>
+					<a href="logout.php">Odjavi se</a>
+				</li>
+			</ul>
+			<?php elseif($row["uloga"] == "2") : ?>
+				<ul class="navigation">
+				<li class="active">
+					<a href="index.php">Pocetna</a>
+				</li>
+				<li>
+					<a href="poslovi.php">Oglasi</a>
+				</li>
+				<li>
+					<a href="oglas.php">Okaci Oglas</a>
+				</li>
+				<li>
+					<a href="profil.php">Moj Profil</a>
+				</li>
+				<li>
+					<a href="logout.php">Odjavi se</a>
+				</li>
+			</ul>
+			<?php elseif($row["uloga"] == "3") : ?>
+				<ul class="navigation">
+				<li class="active">
+					<a href="index.php">Pocetna</a>
+				</li>
+				<li>
+					<a href="poslovi.php">Oglasi</a>
+				</li>
+				<li>
+					<a href="dashboard.php">Dashboard</a>
+				</li>
+				<li>
+					<a href="logout.php">Odjavi se</a>
+				</li>
+			</ul>
+
+			<?php else : ?>
+				<ul class="navigation">
+				<li class="active">
+					<a href="index.php">Pocetna</a>
+				</li>
+				<li>
+					<a href="poslovi.php">Oglasi</a>
+				</li>
+				<li>
+					<a href="login.php">Prijavi se</a>
+				</li>
+			</ul>
+			<?php endif; ?>
+
+</div>
+	<div id="contents">
+		
+		<div class="clearfix">
+			<div class="main">
+
+                <h1>Napravi oglas</h1>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+        </div>
+        <div id="footer">
+            <div class="clearfix">
+                <div class="section">
+                    <h4>Placeholder</h4>
+                    <p>Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</p>
+                </div>
+                <div class="section">
+                    <h4>Placeholder</h4>
+                    <p>Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</p>
+                </div>
+                <div class="section">
+                    <h4>Placeholder</h4>
+                    <p>Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</p>
+                </div>
+            </div>
+            <div id="footnote">
+                <div class="clearfix">
+                    <div class="connect">
+                        <a href="https://www.facebook.com" class="facebook"></a><a href="https://twitter.com/home?lang=hr" class="twitter"></a></a><a href="https://www.pinterest.com" class="pinterest"></a>
+                    </div>
+                    <p>placeholer za footer</p>
+                </div>
+            </div>
+        </div>
+        
+    </body>
+    </html>
+
+
+	dumge: style=" background-color: #4e5944;border: none;color: white;padding: 10px 25px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;border-radius: 8px;"
+
+	forma: style="width: 100%;padding: 12px 20px;margin: 8px 0;display: inline-block;border: 1px solid #ccc;border-radius: 4px;box-sizing: border-box;"
